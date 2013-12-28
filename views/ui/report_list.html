@@ -45,22 +45,29 @@
       url:'/api/report/list.json?_csrf='+_csrf,
       pagination:true,//底部分页
       rownumbers:true,//显示行数
-      fitColumns:true,//自适应列宽
+      fitColumns:false,//自适应列宽
       striped:true,//显示条纹
       pageSize:20,//每页记录数
       remoteSort:false,//是否通过远程服务器对数据排序
-      sortName:'id',//默认排序字段
-      sortOrder:'asc',//默认排序方式 'desc' 'asc'
-      idField : 'id',
+      idField : '_id',
       frozenColumns:[[
         {field:'ck',checkbox:true},
-        {field:'name',title:'报告编号',width:200},
-        {field:'code',title:'角色编码',width:120}
+        {field:'_id',title:'报告编号',width:200},
       ]],
       columns:[[
-        {field:'id',title:'主键',hidden:true,sortable:true,align:'right',width:80},
-        {field:'resourceNames',title:'关联资源',width:165},
-        {field:'remark',title:'描述',width:50}
+        {field: 'attachment', title: '图片', width: 80,
+          formatter: function (val, rec) {
+            if(val)
+              return "<img src=\"/picture/"+ val +"\" style=\"color:red;\" width=40 height=40/>";
+            else
+              return "";
+          }
+        },
+        {field:'comment',title:'文件名',width:200,auto:"123"},
+        {field:'comment',title:'描述',width:200},
+        {field:'tags',title:'标签',width:200,auto:"123"},
+        {field:'userId',title:'用户',width:150,auto:"123"},
+        {field:'status',title:'状态',width:50}
       ]],
       onLoadSuccess:function(){
         $(this).datagrid('clearSelections');//取消所有的已选择项
@@ -125,9 +132,9 @@ function showDialog(row){
 
   //弹出对话窗口
   role_dialog = $('<div/>').dialog({
-    title:'角色详细信息',
+    title:'发布报告',
     width : 800,
-    height : 500,
+    height : 550,
     modal : true,
     maximizable:true,
     href : inputUrl,
@@ -365,32 +372,16 @@ function search(){
 
 </script>
 
-<div id="role_datagrid_menu" class="easyui-menu" style="width:120px;display: none;">
-  <div onclick="showDialog();" data-options="iconCls:'icon-add'">新增</div>
-  <div onclick="edit();" data-options="iconCls:'icon-edit'">编辑</div>
-  <div onclick="del();" data-options="iconCls:'icon-remove'">删除</div>
-  <div onclick="editRoleResource();" data-options="iconCls:'icon-edit'">设置资源</div>
-  <div onclick="editRoleUser();" data-options="iconCls:'icon-edit'">设置用户</div>
-</div>
 
 
-<div id="role_datagrid-toolbar">
-  <div style="margin-left:10px; float: left;">
-    <form id="role_search_form" style="padding: 0px;">
-      角色名称:<input type="text" name="filter_LIKES_name" placeholder="请输入角色名称..."  maxLength="25" style="width: 160px" />
-    </form>
-  </div>
-  <div align="right">
+<div id="role_datagrid_toolbar">
+  <div style="margin-bottom:5px">
     <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="showDialog()">新增</a>
-    <span class="toolbar-btn-separator"></span>
     <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="edit()">编辑</a>
-    <span class="toolbar-btn-separator"></span>
     <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="del()">删除</a>
-    <span class="toolbar-btn-separator"></span>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editRoleResource()">设置资源</a>
-    <span class="toolbar-btn-separator"></span>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editRoleUser()">设置用户</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="save()">保存</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="cancelEdit()">取消编辑</a>
   </div>
 </div>
-<table id="role_datagrid" toolbar="#role_datagrid-toolbar" fit="true"></table>
-   
+<table id="role_datagrid" toolbar="#role_datagrid_toolbar" fit="true"></table>
+

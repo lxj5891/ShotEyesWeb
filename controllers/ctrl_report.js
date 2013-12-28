@@ -13,6 +13,13 @@ var fs = smart.lang.fs
   , report = require('../modules/mod_report.js')
 
 
+exports.add = function (handler, callback) {
+  var code = handler.params.code
+    , newReport = handler.params.newReport
+  report.add(code,newReport,function(err,result){
+    callback(err,result);
+  });
+}
 /**
  * 获取报告一览
  * @param start_

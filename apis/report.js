@@ -7,7 +7,22 @@ var response  = smart.framework.response
   , report      = require("../controllers/ctrl_report");
 
 exports.add = function (req, res) {
-  res.json({status: 200, data: {},msg:"添加成功"});
+  var body = req.body;
+  console.log(body);
+
+  var handler = new context().bind(req, res);
+  handler.addParams("newReport",req.body)
+  report.add(handler,function(err,result){
+    res.json({status: 200, data: {},msg:"添加成功"});
+  });
+
+}
+
+exports.pullList = function(req,res){
+  var handler = new context().bind(req, res);
+  report.getList(handler, function(err, result) {
+    res.render("ui/report_pull",{title:"图片瀑布流",reportList:result});
+  });
 }
 
 exports.list = function (req, res) {

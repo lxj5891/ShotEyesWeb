@@ -8,35 +8,46 @@
       'uploader' : '/item/image/add.json?_csrf=<%=csrftoken%>',
       'onUploadSuccess' : function(file, data, response) {
         var json = $.parseJSON(data);
-        var img="<img src=\"/picture/"+json.data+"\"/>";
-        $("#img_box").append(img);
+
+        $("#img_blank").attr("src","/picture/"+json.data);
+        $("#attachment").val(json.data);
+      },
+      'onUploadProgress' : function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+        console.log(bytesUploaded/bytesTotal * 10);
+        $('#progress').progressbar('setValue', bytesUploaded/bytesTotal * 100);
       }
     });
   });
 </script>
 <div style="width: 780px ;height: 450px;">
-  <form id="role_form" method="post" novalidate>
-    <input type="hidden"  name="id" />
-    <!-- 用户版本控制字段 version -->
-    <input type="hidden" id="version" name="version" />
-    <div>
-      <label>标签:</label>
-      <input name="code" type="text" class="easyui-validatebox"
-             maxLength="36" >
+  <div style="width: 533px;background: #f0f0f0;height: 375px;float: left;margin: 5px 5px 5px 5px;">
+    <div id="img_box" style="height: 375px;width: 532px">
+      <img id="img_blank" src="/images/blank.png" width="532px" height="374px"/>
     </div>
-    <div>
-      <label >描述:</label>
-      <textarea maxLength="255" name="remark"></textarea>
-    </div>
-
-    <div>
+    <div style="margin: 10px 10px 10px 10px;">
       <input id="file_upload" name="file_upload" type="file" multiple="true">
     </div>
+  </div>
+  <div style="width: 227px;background: #f0f0f0;height: 375px;float: left;margin: 5px 5px 5px 5px;">
+    <form id="role_form" method="post" novalidate>
+      <input type="hidden"  name="id" />
+      <!-- 用户版本控制字段 version -->
+      <input type="hidden" id="version" name="version" />
+      <input type="hidden" id="attachment" name="attachment" value=""/>
+      <div>
+        <label >描述:</label>
+        <textarea id="comment" name="comment" maxLength="255" rows="10"></textarea>
+      </div>
 
-    <div>
-      <label >缩略图:</label>
-      <div id="img_box" style="height: 200px;width: 200px"/>
-    </div>
+      <div>
+        <label>标签:</label>
+        <input id="tags" name="tags" type="text" class="easyui-validatebox"
+               maxLength="36" >
+      </div>
+        <div id="progress" class="easyui-progressbar" style="width:200px;"></div>
+      <div>
+      </div>
+    </form>
+  </div>
 
-  </form>
 </div>
