@@ -1,0 +1,42 @@
+<script type="text/javascript">
+  $(function() {
+    $('#file_upload').uploadify({
+      'formData'     : {
+        '_csrf'     : '<%=csrftoken%>'
+      },
+      'swf'      : '/vendor/uploadify/uploadify.swf',
+      'uploader' : '/item/image/add.json?_csrf=<%=csrftoken%>',
+      'onUploadSuccess' : function(file, data, response) {
+        var json = $.parseJSON(data);
+        var img="<img src=\"/picture/"+json.data+"\"/>";
+        $("#img_box").append(img);
+      }
+    });
+  });
+</script>
+<div style="width: 780px ;height: 450px;">
+  <form id="role_form" method="post" novalidate>
+    <input type="hidden"  name="id" />
+    <!-- 用户版本控制字段 version -->
+    <input type="hidden" id="version" name="version" />
+    <div>
+      <label>标签:</label>
+      <input name="code" type="text" class="easyui-validatebox"
+             maxLength="36" >
+    </div>
+    <div>
+      <label >描述:</label>
+      <textarea maxLength="255" name="remark"></textarea>
+    </div>
+
+    <div>
+      <input id="file_upload" name="file_upload" type="file" multiple="true">
+    </div>
+
+    <div>
+      <label >缩略图:</label>
+      <div id="img_box" style="height: 200px;width: 200px"/>
+    </div>
+
+  </form>
+</div>

@@ -55,6 +55,12 @@ exports.update = function(req, res) {
 // uploud image
 exports.updateimage = function(req, res) {
   var handler = new context().bind(req, res);
+  var files = req.files;
+  var tmpFiles  = [];
+  if(files){
+    tmpFiles.push(files.Filedata);
+    handler.addParams("files",tmpFiles);
+  }
   log.operation("begin: upload an item.", handler.uid);
 
   item.addimage(handler, function(err, result) {

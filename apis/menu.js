@@ -13,7 +13,7 @@ exports.nodeList = function(req,res){
       "id": "1",
       "text": "权限管理",
       "iconCls": "icon-application",
-      "checked": false,
+      "checked": true,
       "attributes": {
         "markUrl": null,
         "code": null,
@@ -23,7 +23,7 @@ exports.nodeList = function(req,res){
       "children": [
         {
           "id": "42",
-          "text": "角色管理",
+          "text": "报告瀑布流",
           "iconCls": "icon-group",
           "checked": false,
           "attributes": {
@@ -37,14 +37,14 @@ exports.nodeList = function(req,res){
         },
         {
           "id": "43",
-          "text": "机构管理",
+          "text": "报告管理",
           "iconCls": "icon-group",
           "checked": false,
           "attributes": {
             "markUrl": "/base/organ*",
             "code": null,
             "type": 0,
-            "url": "/base/organ.action"
+            "url": "/ui/reportList"
           },
           "children": [],
           "state": "open"
@@ -58,7 +58,7 @@ exports.nodeList = function(req,res){
             "markUrl": "/base/user*",
             "code": null,
             "type": 0,
-            "url": "/base/user.action"
+            "url": "/ui/user"
           },
           "children": [],
           "state": "open"
@@ -75,141 +75,6 @@ exports.nodeList = function(req,res){
             "url": "/base/resource.action"
           },
           "children": [],
-          "state": "open"
-        }
-      ],
-      "state": "open"
-    },
-    {
-      "id": "45",
-      "text": "系统配置",
-      "checked": false,
-      "attributes": {
-        "markUrl": null,
-        "code": null,
-        "type": 0,
-        "url": null
-      },
-      "children": [
-        {
-          "id": "46",
-          "text": "字典类型",
-          "iconCls": "icon-book",
-          "checked": false,
-          "attributes": {
-            "markUrl": "/sys/dictionary-type*",
-            "code": null,
-            "type": 0,
-            "url": "/sys/dictionary-type.action"
-          },
-          "children": [],
-          "state": "open"
-        },
-        {
-          "id": "47",
-          "text": "数据字典",
-          "iconCls": "icon-book",
-          "checked": false,
-          "attributes": {
-            "markUrl": "/sys/dictionary*",
-            "code": null,
-            "type": 0,
-            "url": "/sys/dictionary.action"
-          },
-          "children": [],
-          "state": "open"
-        },
-        {
-          "id": "48",
-          "text": "bug管理",
-          "iconCls": "icon-bug",
-          "checked": false,
-          "attributes": {
-            "markUrl": "/sys/bug*",
-            "code": null,
-            "type": 0,
-            "url": "/sys/bug.action"
-          },
-          "children": [
-            {
-              "id": "49",
-              "text": "新增",
-              "checked": false,
-              "attributes": {
-                "markUrl": "/sys/bug!add*;/sys/bug!save*",
-                "code": "bug:add",
-                "type": 0,
-                "url": null
-              },
-              "children": [],
-              "state": "open"
-            },
-            {
-              "id": "50",
-              "text": "编辑",
-              "checked": false,
-              "attributes": {
-                "markUrl": "/sys/bug!save*",
-                "code": "bug:edit",
-                "type": 0,
-                "url": null
-              },
-              "children": [],
-              "state": "open"
-            },
-            {
-              "id": "51",
-              "text": "Excel导入",
-              "checked": false,
-              "attributes": {
-                "markUrl": "/sys/bug!importExcel*",
-                "code": "bug:importExcel",
-                "type": 0,
-                "url": null
-              },
-              "children": [],
-              "state": "open"
-            },
-            {
-              "id": "52",
-              "text": "Excel导出",
-              "checked": false,
-              "attributes": {
-                "markUrl": "/sys/bug!exportExcel*",
-                "code": "bug:exportExcel",
-                "type": 0,
-                "url": null
-              },
-              "children": [],
-              "state": "open"
-            },
-            {
-              "id": "53",
-              "text": "删除",
-              "checked": false,
-              "attributes": {
-                "markUrl": "/sys/bug!delete*;/sys/bug!remove*",
-                "code": "bug:remove",
-                "type": 0,
-                "url": null
-              },
-              "children": [],
-              "state": "open"
-            },
-            {
-              "id": "54",
-              "text": "查看",
-              "checked": false,
-              "attributes": {
-                "markUrl": "/sys/bug!view*",
-                "code": "bug:view",
-                "type": 0,
-                "url": null
-              },
-              "children": [],
-              "state": "open"
-            }
-          ],
           "state": "open"
         }
       ],

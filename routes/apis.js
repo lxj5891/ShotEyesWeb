@@ -13,9 +13,19 @@ var desk = require("../apis/desk")
   , soldout = require("../apis/soldout")
   , menu = require("../apis/menu");
 
+var report = require("../apis/report");
+
 
 exports.guiding = function(app){
 
+
+  app.all('/api/report/list.json', function(req, res){
+    report.list(req, res);
+  });
+
+  app.post('/api/report/save.json', function(req, res){
+    report.add(req, res);
+  });
 
   // APIs
   app.get('/api/menu/list.json', function(req, res){

@@ -21,7 +21,16 @@ exports.guiding = function (app) {
 
   app.all("/ui/portal",function(req,res){
     res.render("portal",{title:"1"});
+  });
+
+  app.all("/ui/reportList",function(req,res){
+    res.render("ui/report_list",{title:"1"});
+  });
+
+  app.all("/ui/reportInput",function(req,res){
+    res.render("ui/report_input",{title:"新建报告"});
   })
+
 
 
 
