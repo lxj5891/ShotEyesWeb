@@ -1,0 +1,64 @@
+
+
+
+<style type="text/css">
+  .title{
+    font-size:16px;
+    font-weight:bold;
+    padding:20px 10px;
+    background:#eee;
+    overflow:hidden;
+    border-bottom:1px solid #ccc;
+  }
+</style>
+<script type="text/javascript" charset="utf-8">
+ </script>
+<div class="easyui-layout" fit="true" style="width:100%;height:100%;overflow: hidden;">
+  <div region="center" style="height: 100%;overflow: hidden;">
+    <div id="layout_portal_portal"
+         style="position: relative;width:100%;height:100%; overflow-x: hidden;">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div  style="height: 100%;width:200px;overflow: hidden;"
+        data-options="region:'east',title:'日历'">
+    <script type="text/javascript">
+      $(function() {
+        $('#layout_east_calendar').calendar({
+          fit : true,
+          current : new Date(),
+          border : false,
+          onSelect : function(date) {
+            $(this).calendar('moveTo', new Date());
+          }
+        });
+
+;
+
+        $('#layout_east_onlinePanel').panel({
+          tools : [ {
+            iconCls : 'icon-reload',
+            handler : function() {
+              $('#layout_east_onlineDatagrid').datagrid('load');
+            }
+          } ]
+        });
+
+        /* window.setInterval(function() {
+         $('#layout_east_onlineDatagrid').datagrid('load', {});
+         }, 1000 * 60 * 10); */
+      });
+    </script>
+    <div class="easyui-layout" data-options="fit:true,border:false">
+      <div data-options="region:'north',border:false" style="height:180px;overflow: hidden;">
+        <div id="layout_east_calendar"></div>
+      </div>
+      <div data-options="region:'center',border:false" style="overflow-x: hidden;">
+        <div id="layout_east_onlinePanel" data-options="fit:true,border:false" title="用户在线列表">
+          <table id="layout_east_onlineDatagrid"></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

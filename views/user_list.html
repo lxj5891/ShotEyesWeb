@@ -1,0 +1,37 @@
+
+<script type="text/javascript">
+  $(function() {
+
+  });
+</script>
+
+<style type="text/css">
+  #userManager_main{
+    margin: 15px 15px 15px 15px;
+  }
+
+</style>
+
+<div id="userManager_main">
+  <div style="margin:10px 0;"></div>
+  <table class="easyui-datagrid" title="用户维护" style="width:760px;height:520px"
+         data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:20,url:'/user/list.json?_csrf=<%= csrftoken%>',toolbar:'#tb'">
+    <thead>
+    <tr>
+      <th data-options="field:'id',width:250">用户ID</th>
+      <th data-options="field:'username',width:150">用户名</th>
+      <th data-options="field:'role',width:150">用户权限</th>
+      <th data-options="field:'active',width:150,align:'right'">用户激活状态</th>
+    </tr>
+    </thead>
+  </table>
+
+  <div id="tb" style="padding:5px;height:auto">
+    <div style="margin-bottom:5px">
+      <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true">用户添加</a>
+      <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true">用户修改</a>
+      <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true">用户删除</a>
+    </div>
+  </div>
+
+</div>

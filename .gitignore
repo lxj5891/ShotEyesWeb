@@ -13,3 +13,12 @@ results
 
 npm-debug.log
 node_modules
+
+node_modules/
+docs/
+logs/*
+tmp/
+.DS_Store
+.idea
+coverage*
+report/*
