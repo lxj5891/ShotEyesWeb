@@ -19,7 +19,7 @@ function login() {
   var username = $("#name").val()
     , password = $("#pass").val();
 
-  if (client.browser.ie >=10 || client.browser.chrome !=0 || client.browser.safari !=0) {
+  if (client.browser.ie >=10 || client.browser.chrome !=0 || client.browser.safari !=0 || client.browser.webkit!=0) {
   } else {
     Alertify.log.info("supported Browsers: chrome, safari, IE10");
     return;
