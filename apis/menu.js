@@ -11,7 +11,7 @@ exports.nodeList = function(req,res){
   res.json([
     {
       "id": "1",
-      "text": "权限管理",
+      "text": "报告管理",
       "iconCls": "icon-application",
       "checked": true,
       "attributes": {
@@ -50,6 +50,20 @@ exports.nodeList = function(req,res){
           "state": "open"
         },
         {
+          "id": "282",
+          "text": "分类管理",
+          "iconCls": "icon-folder",
+          "checked": false,
+          "attributes": {
+            "markUrl": "/base/resource*",
+            "code": null,
+            "type": 0,
+            "url": "/base/resource.action"
+          },
+          "children": [],
+          "state": "open"
+        },
+        {
           "id": "44",
           "text": "用户管理",
           "iconCls": "icon-user",
@@ -62,21 +76,8 @@ exports.nodeList = function(req,res){
           },
           "children": [],
           "state": "open"
-        },
-        {
-          "id": "282",
-          "text": "资源管理",
-          "iconCls": "icon-folder",
-          "checked": false,
-          "attributes": {
-            "markUrl": "/base/resource*",
-            "code": null,
-            "type": 0,
-            "url": "/base/resource.action"
-          },
-          "children": [],
-          "state": "open"
         }
+
       ],
       "state": "open"
     }

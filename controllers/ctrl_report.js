@@ -16,6 +16,12 @@ var fs = smart.lang.fs
 exports.add = function (handler, callback) {
   var code = handler.params.code
     , newReport = handler.params.newReport
+  var now = new Date();
+  newReport.createat = now;
+  newReport.createby = handler.uid;
+  newReport.editat   = now;
+  newReport.editby   = handler.uid;
+
   report.add(code,newReport,function(err,result){
     callback(err,result);
   });
@@ -28,8 +34,10 @@ exports.add = function (handler, callback) {
  */
 exports.getList = function (handler, callback_) {
   var code = handler.params.code
-    , start = handler.params.start || 0
-    , limit = handler.params.count || 20
+    , page = handler.params.page || 0
+    , limit = handler.params.rows || 20
+    , start = (page - 1) * limit
+
     , keyword = handler.params.keyword
     , tags = handler.params.tags
 

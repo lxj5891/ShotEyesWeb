@@ -13,7 +13,7 @@
         $("#attachment").val(json.data);
       },
       'onUploadProgress' : function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-        console.log(bytesUploaded/bytesTotal * 10);
+
         $('#progress').progressbar('setValue', bytesUploaded/bytesTotal * 100);
       }
     });

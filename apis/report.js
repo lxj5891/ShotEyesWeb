@@ -13,7 +13,9 @@ exports.add = function (req, res) {
   var handler = new context().bind(req, res);
   handler.addParams("newReport",req.body)
   report.add(handler,function(err,result){
-    res.json({status: 200, data: {},msg:"添加成功"});
+    res.setHeader("Content-type","text/html; charset=UTF-8");
+    res.send({status: 200, data: {} , msg:"添加成功"});
+
   });
 
 }

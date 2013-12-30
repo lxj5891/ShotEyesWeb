@@ -19,7 +19,7 @@ var report = require("../apis/report");
 exports.guiding = function(app){
 
 
-  app.all('/api/report/list.json', function(req, res){
+  app.get('/api/report/list.json', function(req, res){
     report.list(req, res);
   });
 
