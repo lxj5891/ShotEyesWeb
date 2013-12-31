@@ -34,16 +34,17 @@ exports.add = function (handler, callback) {
  */
 exports.getList = function (handler, callback_) {
   var code = handler.params.code
-    , page = handler.params.page || 0
-    , limit = handler.params.rows || 20
-    , start = (page - 1) * limit
+    , page = handler.params.page || 1
+    , limit = handler.params.rows || 20;
+
+  var start = (page - 1) * limit
 
     , keyword = handler.params.keyword
     , tags = handler.params.tags
 
     , condition = {
-      valid: 1
-    };
+    valid: 1
+  };
 
   if (keyword) {
     keyword = util.quoteRegExp(keyword);
@@ -66,7 +67,7 @@ exports.getList = function (handler, callback_) {
       if (err) {
         return callback_(new error.InternalServer(err));
       }
-
+      console.log(result);
       return callback_(undefined, {rows: result, total: count});
 
     });

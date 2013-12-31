@@ -3,7 +3,7 @@ module.exports = {
   "db": {
     "host": "112.124.23.114"
     , "port": 27017
-    , "dbname": "diandian"
+    , "dbname": "shoteyes"
     , "pool": 5
   },
 

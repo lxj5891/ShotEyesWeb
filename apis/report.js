@@ -23,6 +23,7 @@ exports.add = function (req, res) {
 exports.pullList = function(req,res){
   var handler = new context().bind(req, res);
   report.getList(handler, function(err, result) {
+    console.log(result);
     res.render("ui/report_pull",{title:"图片瀑布流",reportList:result});
   });
 }
