@@ -3,6 +3,10 @@ var request = require('supertest')(app);
 var should = require("should");
 
 describe('/apis/report.js', function () {
+  before(function (done) {
+    app.listen(0, done);
+  });
+
   var cookie = undefined;
 
   it('should login ok', function (done){

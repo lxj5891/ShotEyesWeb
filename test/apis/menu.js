@@ -4,6 +4,10 @@ var should = require("should");
 
 
 describe('/apis/menu.js', function () {
+  before(function (done) {
+    app.listen(0, done);
+  });
+
   var cookie = undefined;
 
   it('should login ok', function (done){

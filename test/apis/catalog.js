@@ -4,9 +4,13 @@ var should = require("should");
 
 
 describe('/apis/catalog.js', function () {
+  before(function (done) {
+    app.listen(0, done);
+  });
+
   var cookie = undefined;
   var _csrf;
-  var testData = { id: '', name: '123123123', description: '123123' };
+  var testData = { name: '123123123', description: '123123' };
   var testId = "";
   it('should login ok', function (done){
     request.get('/simplelogin?name=admin&password=admin')
@@ -29,7 +33,8 @@ describe('/apis/catalog.js', function () {
 
   it('should /api/catalog/save.json 200', function (done) {
     console.log(_csrf);
-    request.post('/api/catalog/save.json?_csrf=' + _csrf).set('cookie', cookie).send(testData)
+
+    request.post('/api/catalog/save.json?_csrf=' + encodeURIComponent(_csrf)).set('cookie', cookie).send(testData)
       .expect(200, function (err, res) {
         res.should.status(200);
         should.exist(res);
@@ -41,10 +46,27 @@ describe('/apis/catalog.js', function () {
       });
   });
 
+  it('should /api/catalog/save.json update', function (done) {
+    console.log(_csrf);
+    testData._id = testId;
+    testData.name = "update";
+    request.post('/api/catalog/save.json?_csrf=' + encodeURIComponent(_csrf)).set('cookie', cookie).send(testData)
+      .expect(200, function (err, res) {
+        res.should.status(200);
+        should.exist(res);
+        var json = eval("(" + res.text + ")");
+        res.should.status(200);
+        json.should.have.property('data');
+        json.data.should.have.property('name',"update");
+        testId = json.data._id;
+        done();
+      });
+  });
+
   it('should /api/catalog/save.json error', function (done) {
     console.log(_csrf);
     testData._id = "1232132";
-    request.post('/api/catalog/save.json?_csrf=' + _csrf).set('cookie', cookie).send(testData)
+    request.post('/api/catalog/save.json?_csrf=' + encodeURIComponent(_csrf)).set('cookie', cookie).send(testData)
       .expect(200, function (err, res) {
         res.should.status(200);
         done();
@@ -53,7 +75,7 @@ describe('/apis/catalog.js', function () {
 
   it('should /api/catalog/remove.json 200', function (done) {
 
-    request.post('/api/catalog/remove.json?_csrf=' + _csrf).set('cookie', cookie).send({id:testId})
+    request.post('/api/catalog/remove.json?_csrf=' + encodeURIComponent(_csrf)).set('cookie', cookie).send({id:testId})
       .expect(200, function (err, res) {
         res.should.status(200);
         done();
