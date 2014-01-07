@@ -13,7 +13,6 @@ exports.guiding = function (app) {
   app.get("/report" , report.page);
 
   app.all("/ui/reportPull" , function(req,res){
-
     report.pullList(req,res);
   });
 

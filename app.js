@@ -15,6 +15,7 @@ var http        = smart.lang.http
   , routes      = require("./routes")
   , websocket   = require("./ws/websocket");
 
+
 var app = express();
 
 /**
@@ -49,4 +50,5 @@ if (process.env.NODE_ENV !== 'test') {
 
 
 module.exports = app;
+//exports.app = app;
 

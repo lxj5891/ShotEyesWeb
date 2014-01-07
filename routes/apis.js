@@ -14,9 +14,7 @@ exports.guiding = function(app){
     report.add(req, res);
   });
 
-  app.get('/api/menu/list.json', function(req, res){
-    menu.appList(req, res);
-  });
+
 
 }
 
