@@ -35,14 +35,18 @@ app.use(middleware.timeout);      // 设定超时
 
 routes.guiding( app );
 
-//app.use(middleware.parseError);
-
 /**
  * 启动服务
  */
-var server = http.createServer(app).listen(app.get("port"), function(){
 
-  log.info("Express server listening on port " + app.get("port"));
-});
+if (process.env.NODE_ENV !== 'test') {
+  var server = http.createServer(app).listen(app.get("port"), function(){
 
-websocket.startup(server);
+    log.info("Express server listening on port " + app.get("port"));
+  });
+
+  websocket.startup(server);
+}
+
+
+module.exports = app;

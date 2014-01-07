@@ -1,7 +1,5 @@
 
 var testapi     = require('../apis/testapi')
-  , orderapi    = require('../apis/order')
-  , desk    = require('../apis/desk')
   , log         = smart.framework.log
   , action      = require('./action');
 
@@ -17,15 +15,10 @@ exports.register = function() {
   };
 
   // 测试用的Action
-  dispatchMap["test"] = testapi.test;
-  //dispatchMap["test1"] = testapi.test1;
-  dispatchMap["addOrder"] = orderapi.addOrder;
 
   // 广播消息
   {
     // 刷新一个桌的信息
-    add("refresh_desk", desk.wsRefresh);
-    add("refresh_order", orderapi.wsRefresh);
   }
 }
 

@@ -3,7 +3,7 @@ var response  = smart.framework.response
   , util      = smart.framework.util
   , context   = smart.framework.context
   , log       = smart.framework.log
-  , _         = require('underscore')
+  , _         = smart.util.underscore
   , report      = require("../controllers/ctrl_report");
 
 exports.add = function (req, res) {
