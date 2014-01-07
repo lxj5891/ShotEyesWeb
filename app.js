@@ -40,13 +40,13 @@ routes.guiding( app );
  */
 
 if (process.env.NODE_ENV !== 'test') {
-  var server = http.createServer(app).listen(app.get("port"), function(){
 
-    log.info("Express server listening on port " + app.get("port"));
-  });
+  app.listen(app.get("port"));
+  console.log("SmartCore server listening on port " + app.get("port"));
+  console.log("SmartCore listening on port %d in %s mode", app.get("port"), app.settings.env);
 
-  websocket.startup(server);
 }
 
 
 module.exports = app;
+

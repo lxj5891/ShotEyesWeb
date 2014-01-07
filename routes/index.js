@@ -2,6 +2,7 @@
 var log       = smart.framework.log
   , apis      = require("./apis.js")
   , user      = require("../apis/user.js")
+  , status      = require("../apis/status.js")
   , website      = require("./website.js")
 
 /*
@@ -11,6 +12,9 @@ var log       = smart.framework.log
 exports.guiding = function (app) {
   apis.guiding(app);
   website.guiding(app);
+
+  // site status
+  app.get('/status.json', status.status);
 
   app.get("/",function(req, res) {
     res.render("login", {"title": "login"});

@@ -1,16 +1,19 @@
 var app = require('../app');
+var request = require('supertest')(app);
 var should = require("should");
 
-describe('controllers/status.js', function () {
+describe('/apis/status.js', function () {
   before(function (done) {
     app.listen(3000, done);
   });
-  after(function () {
-    app.close();
-  });
 
-  it('should /status 200', function (done) {
+
+  it('should /status.json 200', function (done) {
+    request.get('/status.json')
+      .expect(200, function (err, res) {
         done();
+      });
+
   });
 
 
