@@ -30,11 +30,12 @@
 <script>
 
   var catalog_dialog;
-  var catalog_form
+  var catalog_form;
+  var catalog_datagrid;
   $(function() {
     $('#catalog_dialog').dialog('close');
 
-    $('#catalog_list').datagrid({
+    catalog_datagrid = $('#catalog_list').datagrid({
       url:'/api/catalog/list.json',
       cache: false,
       pagination:true,//底部分页
@@ -75,31 +76,66 @@
     });
 
 
+
+
   });
 
-  function showDialog(row){
-    formInit();
-    var inputUrl = "dfdf" ;
-    if(row != undefined && row.id){
-      inputUrl = inputUrl+"?id="+row.id;
+  //编辑
+  function edit(rowIndex, rowData){
+    //响应双击事件
+    if(rowIndex != undefined) {
+      showDialog(rowData);
+      return;
     }
+    //选中的所有行
+    var rows = role_datagrid.datagrid('getSelections');
+    //选中的行（第一次选择的行）
+    var row = role_datagrid.datagrid('getSelected');
+    if (row){
+      showDialog(row);
+    }else{
+      eu.showMsg("请选择要操作的对象！");
+    }
+  }
 
-    catalog_dialog = $('#catalog_dialog').dialog({
-      title:'发布报告',
-      width : 400,
-      height : 200,
-      modal : true,
-      maximizable:true,
-      onClose : function() {
-        $(this).dialog('destroy');
-      },
-      onLoad:function(){
-        if(row){
-          catalog_form.form('load', row);
+  //删除
+  function del(){
+    var rows = role_datagrid.datagrid('getSelections');
+
+    if(rows.length >0){
+      $.messager.confirm('确认提示！','您确定要删除选中的所有行？',function(r){
+        if (r){
+          var ids = new Object();
+          for(var i=0;i<rows.length;i++){
+            ids[i] = rows[i].id;
+          }
+          $.post('/essh/base/role!remove.action',{ids:ids},function(data){
+            if (data.code==1){
+              role_datagrid.datagrid('load');	// reload the user data
+              eu.showMsg(data.msg);//操作结果提示
+            } else {
+              eu.showAlertMsg(data.msg,'error');
+            }
+          },'json');
+
         }
+      });
+    }else{
+      eu.showMsg("请选择要操作的对象！");
+    }
+  }
 
-      }
-    }).dialog('open');
+  function showDialog(row){
+
+
+    formInit();
+
+    catalog_dialog = $('#catalog_dialog').dialog('open');
+
+    if(row){
+      console.log(row);
+      catalog_form.form('load', row);
+    }
   }
 
   function add(){
@@ -108,6 +144,8 @@
   }
 
   function formInit(){
+    $("#name").val("");
+    $("#description").val("");
     catalog_form = $('#catalog_form').form({
       url: '/api/catalog/save.json?_csrf='+_csrf+'&_t='+new Date().getTime(),
       onSubmit: function(param){
@@ -125,13 +163,13 @@
         $.messager.progress('close');
         var json = $.parseJSON(data);
         if (json.status == 200){
-          catalog_dialog.dialog('destroy');//销毁对话框
-          role_datagrid.datagrid({
+          catalog_dialog.dialog('close');
+          catalog_datagrid.datagrid({
             queryParams: {
               _t: new Date().getTime()
             }
           });
-          role_datagrid.datagrid('reload');//重新加载列表数据
+          catalog_datagrid.datagrid('reload');//重新加载列表数据
 
           eu.showMsg(json.msg);//操作结果提示
         }else if(json.status == 300){
@@ -159,13 +197,13 @@
 
 
 <table id="catalog_list" class="easyui-datagrid" toolbar="#catalog_datagrid_toolbar" fit="true"
-       data-options="singleSelect:true,collapsible:true,url:'/api/catalog/list.json',method:'get'">
+       data-options="singleSelect:true,collapsible:true">
   <thead>
   <tr>
     <th data-options="field:'_id',width:200">编号</th>
     <th data-options="field:'name',width:200">名称</th>
-    <th data-options="field:'description',width:300,align:'right'">描述</th>
-    <th data-options="field:'createat',width:200,align:'right'">创建时间</th>
+    <th data-options="field:'description',width:300,align:'left'">描述</th>
+    <th data-options="field:'createat',width:200,align:'left'">创建时间</th>
   </tr>
   </thead>
 </table>
@@ -186,15 +224,15 @@
                 }]" style="width:400px;height:200px;padding:10px">
   <div style="padding:10px 0 10px 60px">
     <form id="catalog_form" method="post">
-      <input type="hidden" name="id">
+      <input type="hidden" id="_id" name="_id">
       <table>
         <tr>
           <td>名称:</td>
-          <td><input class="easyui-validatebox" type="text" name="name" data-options="required:true"/></td>
+          <td><input id="name" class="easyui-validatebox" type="text" name="name" data-options="required:true"/></td>
         </tr>
         <tr>
           <td>描述:</td>
-          <td><textarea name="description" style="height:60px;"></textarea></td>
+          <td><textarea id="description" name="description" style="height:60px;"></textarea></td>
         </tr>
       </table>
     </form>

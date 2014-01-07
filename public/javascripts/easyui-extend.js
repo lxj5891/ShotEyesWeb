@@ -314,10 +314,14 @@ $.extend($.fn.tabs.methods, {
             if($frame.length>0){   
                 $frame[0].contentWindow.document.write('');   
                 $frame[0].contentWindow.close();   
-                $frame.remove();   
-                if($.browser.msie){   
-                    CollectGarbage();   
-                }   
+                $frame.remove();
+                try{
+                  if($.browser.msie){
+                    CollectGarbage();
+                  }
+                } catch(e){
+
+                }
             }   
             $tabBody.html('');   
   
@@ -326,7 +330,8 @@ $.extend($.fn.tabs.methods, {
             var $maskMessage = $('<div class="mask-message" style="z-index:3;width:auto;height:16px;line-height:16px;position:absolute;top:50%;left:50%;margin-top:-20px;margin-left:-92px;border:2px solid #d4d4d4;padding: 12px 5px 10px 30px;background: #ffffff url(\''
             		+ctx+'/js/jquery/easyui-1.3.4/themes/default/images/loading.gif\') no-repeat scroll 5px center;">'
             		+ (params.iframe.message || '页面加载中...') + '</div>').appendTo($tabBody);
-			var $containterMask = $('<div style="position:absolute;width:100%;height:100%;z-index:1;background:#fff;"></div>').appendTo($tabBody);      
+
+            var $containterMask = $('<div style="position:absolute;width:100%;height:100%;z-index:1;background:#fff;"></div>').appendTo($tabBody);
             var $containter = $('<div style="position:absolute;width:100%;height:100%;z-index:0;"></div>').appendTo($tabBody);      
      
             var iframe = document.createElement("iframe");      

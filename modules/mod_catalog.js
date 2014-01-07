@@ -2,7 +2,9 @@
 
 var mongo       = smart.util.mongoose
   , conn        = smart.framework.connection
-  , schema      = mongo.Schema;
+  , schema      = mongo.Schema
+  , ObjectId    = schema.ObjectId;
+
 
 /**
  * 分类 的  schema
@@ -76,10 +78,31 @@ exports.add = function(code, newCatalog, callback) {
 
   var catalog = model(code);
 
-  new catalog(newCatalog).save(function(err, result) {
+  var query = new catalog(newCatalog);
 
+  query.save(function(err, result) {
+    console.log(err);
     callback(err, result);
   });
+};
+
+
+
+/**
+ * 修改分类
+ * @param {string} code 公司Code
+ * @param {object} condition 条件
+ * @param {function} callback 返回件数
+ */
+exports.update = function(code, id , newCatalog, callback) {
+
+  var catalog = model(code);
+  delete newCatalog._id;
+  catalog.findByIdAndUpdate(id,newCatalog,function(err, result){
+    console.log(err);
+    callback(err, result);
+  });
+
 };
 
 /**

@@ -26,11 +26,12 @@ exports.list = function (req, res) {
 exports.add = function (req, res) {
 
   var handler = new context().bind(req, res);
+  console.log(req.body);
   handler.addParams("newCatalog",req.body);
 
   catalog.add(handler,function(err,result){
     if (err) {
-      return res.send({status: 300, data: {} , msg:"添加失败"});
+      return res.send({status: 300, data: err , msg:"添加失败"});
     }
     res.setHeader("Content-type","text/html; charset=UTF-8");
     res.send({status: 200, data: result , msg:"添加成功"});

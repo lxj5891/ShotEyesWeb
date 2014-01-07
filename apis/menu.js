@@ -55,7 +55,7 @@ exports.nodeList = function(req,res){
           "iconCls": "icon-folder",
           "checked": false,
           "attributes": {
-            "markUrl": "/base/resource*",
+            "markUrl": "/catalog",
             "code": null,
             "type": 0,
             "url": "/catalog"

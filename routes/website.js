@@ -27,7 +27,12 @@ exports.guiding = function (app) {
 
   app.all("/ui/reportInput",function(req,res){
     res.render("ui/report_input",{title:"新建报告"});
+  });
+
+  app.get("/ui/catalog/addview",function(req,res){
+    res.render("ui/catalog_input",{title:"新建分类"});
   })
+
 
 
 

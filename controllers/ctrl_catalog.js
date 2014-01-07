@@ -41,9 +41,18 @@ exports.add = function (handler, callback) {
   newCatalog.editat   = now;
   newCatalog.editby   = handler.uid;
 
-  catalog.add(code,newCatalog,function(err,result){
-    callback(err,result);
-  });
+  if(!newCatalog._id || newCatalog._id.length == 0){
+    catalog.add(code,newCatalog,function(err,result){
+      callback(err,result);
+    });
+  } else {
+
+
+    catalog.update(code ,newCatalog._id ,newCatalog,function(err,result){
+      callback(err,result);
+    });
+  }
+
 }
 /**
  * 获取类型一览
