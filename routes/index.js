@@ -20,10 +20,6 @@ exports.guiding = function (app) {
     res.render("login", {"title": "login"});
   });
 
-  app.get("/",function(req, res) {
-    res.render("login", {"title": "login"});
-  });
-
   app.get("/dashboard",function(req, res) {
     res.render("dashboard", {"title": "login"});
   });

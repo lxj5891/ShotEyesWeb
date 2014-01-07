@@ -13,6 +13,28 @@ describe('/apis/report.js', function () {
       });
   });
 
+  it('should /report 200', function (done) {
+    request.get('/report').set('cookie', cookie)
+      .expect(200, function (err, res) {
+        done();
+      });
+  });
+
+  it('should /ui/report/pull 200', function (done) {
+    request.get('/ui/report/pull').set('cookie', cookie)
+      .expect(200, function (err, res) {
+        done();
+      });
+  });
+
+
+  it('should /catalog 200', function (done) {
+    request.get('/catalog').set('cookie', cookie)
+      .expect(200, function (err, res) {
+        done();
+      });
+  });
+
   it('should /api/report/list.json 200', function (done) {
     request.get('/api/report/list.json').set('cookie', cookie)
       .expect(200, function (err, res) {

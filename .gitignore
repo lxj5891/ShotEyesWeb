@@ -17,6 +17,8 @@ node_modules
 node_modules/
 docs/
 logs/*
+.cov/*
+coverage.html
 tmp/
 .DS_Store
 .idea

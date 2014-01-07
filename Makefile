@@ -7,11 +7,12 @@ install:
 	@sudo npm install
 
 test: install
-	@NODE_ENV=test ./node_modules/mocha/bin/mocha \
+	@TEST=1 ./node_modules/mocha/bin/mocha \
 		--reporter $(REPORTER) --timeout $(TESTTIMEOUT) $(TESTS)
 
 cov: install
 	@rm -rf .cov
+	@rm -rf coverage.html
 	@$(JSCOVERAGE) --exclude=public --exclude=test . .cov
 	@cp -rf node_modules test public .cov
 

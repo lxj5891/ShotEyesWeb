@@ -40,7 +40,7 @@ routes.guiding( app );
  * 启动服务
  */
 
-if (process.env.NODE_ENV !== 'test') {
+if (!process.env.TEST) {
 
   app.listen(app.get("port"));
   console.log("SmartCore server listening on port " + app.get("port"));
@@ -50,5 +50,5 @@ if (process.env.NODE_ENV !== 'test') {
 
 
 module.exports = app;
-//exports.app = app;
+
 

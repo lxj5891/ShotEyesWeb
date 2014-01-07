@@ -1,18 +1,19 @@
-
-
-var user = require("../apis/user");
-var report = require("../apis/report");
-var menu = require("../apis/menu");
+var user = require("../apis/user")
+  , report = require("../apis/report")
+  , menu = require("../apis/menu")
+  , catalog = require("../apis/catalog");
 
 exports.guiding = function (app) {
   // APIs
-  app.post('/menu/nodes.json', function(req, res){
+  app.get('/menu/nodes.json', function(req, res){
     menu.nodeList(req, res);
   });
 
   app.get("/report" , report.page);
 
-  app.all("/ui/reportPull" , function(req,res){
+  app.get("/catalog" , catalog.page);
+
+  app.all("/ui/report/pull" , function(req,res){
     report.pullList(req,res);
   });
 

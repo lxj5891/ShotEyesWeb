@@ -20,5 +20,13 @@ describe('/apis/status.js', function () {
 
   });
 
+  it('should /status.json 200', function (done) {
+    request.get('/status.json')
+      .expect(200, function (err, res) {
+        done();
+      });
+
+  });
+
 
 });

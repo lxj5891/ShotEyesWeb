@@ -34,10 +34,9 @@ exports.list = function (req, res) {
 
   report.getList(handler, function(err, result) {
     log.operation("finish: get report list.", handler.uid);
-//    response.send(res, err, result);
-    res.json(result);
+    response.send(res, err, result);
   });
-}
+};
 
 exports.page = function (req, res) {
   res.render("report_list", {title: 123});

@@ -30,7 +30,7 @@ exports.nodeList = function(req,res){
             "markUrl": "/base/role*",
             "code": null,
             "type": 0,
-            "url": "/ui/reportPull"
+            "url": "/ui/report/pull"
           },
           "children": [],
           "state": "open"
@@ -58,7 +58,7 @@ exports.nodeList = function(req,res){
             "markUrl": "/base/resource*",
             "code": null,
             "type": 0,
-            "url": "/base/resource.action"
+            "url": "/catalog"
           },
           "children": [],
           "state": "open"
