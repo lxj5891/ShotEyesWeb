@@ -77,11 +77,10 @@ exports.total = function(code, condition, callback) {
 exports.add = function(code, newCatalog, callback) {
 
   var catalog = model(code);
-
+  delete newCatalog._id;
   var query = new catalog(newCatalog);
 
   query.save(function(err, result) {
-    console.log(err);
     callback(err, result);
   });
 };

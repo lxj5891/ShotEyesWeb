@@ -41,7 +41,7 @@ exports.add = function (handler, callback) {
   newCatalog.editat   = now;
   newCatalog.editby   = handler.uid;
 
-  if(!newCatalog._id || newCatalog._id.length == 0){
+  if(!newCatalog._id && newCatalog._id.length == 0){
     catalog.add(code,newCatalog,function(err,result){
       callback(err,result);
     });
